@@ -34,10 +34,17 @@ create table requests (
   primary key (id)
 );
 
+create table admins (
+  login    varchar(50) not null,
+  password char(64) not null,
+  primary key (login)
+)
+
+insert into admins values ('admin', convert(char(64), hashbytes('SHA2_256', 'adminpassword'), 2))
+
 create login backend with password='backendpassword', default_database=spa;
 create user backend for login backend;
 
-grant insert on payments to backend;
-grant insert on requests to backend;
-grant select, update(isSafe) on payments to backend;
-grant select on requests to backend;
+grant insert, select, update(isSafe) on payments to backend;
+grant insert, select on requests to backend;
+grant select on admins to backend;
