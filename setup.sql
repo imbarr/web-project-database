@@ -13,7 +13,7 @@ create table payments (
   id int                                                                            not null identity,
   cardNumber char(16) check (cardNumber like '[0-9]%')                              not null,
   expirationMonth int check (expirationMonth >= 1 and expirationMonth <= 12)        not null,
-  expirationYear int check (expirationYear >= 19 and expirationYear <= 35)          not null,
+  expirationYear int check (expirationYear >= 19 and expirationYear <= 99)          not null,
   CVC char(3) check (CVC like '[0-9]%')                                             not null,
   money int check (money >= 1000 and money <= 75000)                                not null,
   comment nvarchar(150)                                                             null,
